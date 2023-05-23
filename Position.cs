@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Micii_poneii
+namespace Durere_cu_ponei
 {
     public class Position
     {
