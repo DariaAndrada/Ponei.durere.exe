@@ -22,10 +22,17 @@ namespace Durere_cu_poneii
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+private readonly Dictionary<Direction, int> dirToRotation = new()
         {
-            InitializeComponent();
-        }
+            { Direction.Left, 270 },
+            { Direction.Right, 90 },
+            { Direction.Down, 180 },
+            { Direction.Up, 0 }//daria
+        };
+        private readonly int rows = 15, cols = 15;
+        private readonly Image[,] gridImages;
+        private GameState gameState;
+        private bool gameRunning;
     }
      private async Task RunGame()
         {
@@ -49,7 +56,28 @@ namespace Durere_cu_poneii
                 gameRunning = false;
             }
         }
-        
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (gameState.GameOver)
+            {
+                return;
+            }
+            switch (e.Key)
+            {
+                case Key.Left:
+                    gameState.ChangeDirection(Direction.Left);
+                    break;
+                case Key.Right:
+                    gameState.ChangeDirection(Direction.Right);
+                    break;
+                case Key.Up:
+                    gameState.ChangeDirection(Direction.Up);
+                    break;
+                case Key.Down:
+                    gameState.ChangeDirection(Direction.Down);
+                    break;
+            }
+        }
         private async Task GameLoop()
         {
             while (!gameState.GameOver)
