@@ -1,4 +1,4 @@
-﻿namespace Poneii
+﻿namespace Durere_cu_poneii
 {
     public enum GridValue
     {
