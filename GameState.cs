@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 
 
-namespace Poneii
+namespace Durere_cu_ponei
 {
     public class GameState
     {
