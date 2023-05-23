@@ -1,12 +1,72 @@
-﻿<Window x:Class="Durere_cu_poneii.MainWindow"
+<Window x:Class="Durere_cu_ponei.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Durere_cu_poneii"
+        xmlns:local="clr-namespace:Durere_cu_ponei"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Micii_Poneii" Height="500" Width="800"
+        MinWidth="300" MinHeight="300"
+        Background="{StaticResource BackgroundColor}"
+        Foreground="{StaticResource TextColor}"
+        FontFamily="{StaticResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        Icon="Assets/icon.ico"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        KeyDown="Window_KeyDown">
+    <Viewbox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="ScoreText"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Stretch"
+                   Text="SCORE: 0"
+                   Foreground="#D473D4"
+                   FontFamily="Comic Sans MS"
+                   FontStyle="Italic"
+                   FontSize="22"
+                   Margin="10"/>
+            <Border x:Name="GridBorder"
+                Grid.Row="1"
+                BorderBrush="{StaticResource GridLineColor}"
+                BorderThickness="1.5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderOptions.EdgeMode="Aliased"
+                Margin="20,0,20,20">
+                <UniformGrid x:Name="GameGrid"
+                             Width="400"
+                             Height="400"
+                             Background="{StaticResource GridBackgroundColor}"
+                             SnapsToDevicePixels="True"
+                             RenderOptions.BitmapScalingMode="HighQuality">
+                </UniformGrid>
+            </Border>
+            <Border x:Name="Overlay"
+                    Width="600"
+                    Height="420"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="10,37,0,0"
+                    RenderOptions.EdgeMode="Aliased" Grid.RowSpan="2">
 
-    </Grid>
+                <Border.Background>
+                    <ImageBrush ImageSource="Assets/Sleep.png" />
+                </Border.Background>
+                <TextBlock x:Name="OverlayText"
+                        Text=" Start "
+                        FontSize="30"
+                        FontFamily="Ink Free"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#CFA0E9"
+                        RenderTransformOrigin="0.463,4.728" Margin="89,337,0,0">
+                </TextBlock>
+
+            </Border>
+        </Grid>
+    </Viewbox>
 </Window>
