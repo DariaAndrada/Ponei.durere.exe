@@ -54,7 +54,7 @@
                     RenderOptions.EdgeMode="Aliased" Grid.RowSpan="2">
 
                 <Border.Background>
-                    <ImageBrush ImageSource="Assets/Sleep.png" />
+                    <ImageBrush ImageSource="Assets/poni.png" />
                 </Border.Background>
                 <TextBlock x:Name="OverlayText"
                         Text=" Start "
