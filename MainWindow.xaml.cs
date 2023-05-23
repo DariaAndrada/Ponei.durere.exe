@@ -22,18 +22,32 @@ namespace Durere_cu_poneii
     /// </summary>
     public partial class MainWindow : Window
     {
+    private readonly Dictionary<GridValue, ImageSource> gridValToImage = new()
+        {
+                { GridValue.Empty, Images.Empty },
+                { GridValue.Ponei, Images.Body },
+                { GridValue.Food, Images.Food }
+        };
+  
+    
 private readonly Dictionary<Direction, int> dirToRotation = new()
         {
             { Direction.Left, 270 },
             { Direction.Right, 90 },
             { Direction.Down, 180 },
-            { Direction.Up, 0 }//daria
+            { Direction.Up, 0 }
         };
         private readonly int rows = 15, cols = 15;
         private readonly Image[,] gridImages;
         private GameState gameState;
         private bool gameRunning;
-    }
+    public MainWindow()
+        {
+            InitializeComponent();
+            gridImages = SetupGrid();
+            gameState = new GameState(rows, cols); //vivi
+        }
+
      private async Task RunGame()
         {
             Draw();
@@ -87,11 +101,47 @@ private readonly Dictionary<Direction, int> dirToRotation = new()
                 Draw();
             }
             }
+            private Image[,] SetupGrid()
+        {
+            Image[,] images = new Image[rows, cols];
+            GameGrid.Rows = rows;
+            GameGrid.Columns = cols;
+            GameGrid.Width = GameGrid.Height * (cols / (double)rows);
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    Image image = new Image
+                    {
+                        Source = Images.Empty,
+                        RenderTransformOrigin = new Point(0.5, 0.5)
+                    };
+                    images[r, c] = image;
+                    GameGrid.Children.Add(image);
+                }
+            }
+            return images;
+        }
             private void Draw()
         {
             DrawGrid();
             DrawPoneiHead();
             ScoreText.Text = $"SCORE: {gameState.Score}";
+        }
+        private void DrawGrid()
+        {
+           
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    GridValue gridVal = gameState.Grid[r, c];
+                    gridImages[r, c].Source = gridValToImage[gridVal];
+                    gridImages[r, c].RenderTransform = Transform.Identity;
+
+                }
+            }
         }
         
         private void DrawPoneiHead()
